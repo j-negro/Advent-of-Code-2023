@@ -1,0 +1,48 @@
+cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.35.2.
+--
+-- see: https://github.com/sol/hpack
+
+name:           AoC23-Day2
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/j-negro/Advent-of-Code-2023#README>
+homepage:       https://github.com/j-negro/Advent-of-Code-2023#readme
+bug-reports:    https://github.com/j-negro/Advent-of-Code-2023/issues
+author:         Juan Negro
+maintainer:     Juan Negro
+copyright:      2023 Juan Negro
+license:        BSD-3-Clause
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/j-negro/Advent-of-Code-2023
+
+executable fst-puzzle
+  main-is: Solution.hs
+  other-modules:
+      GameParser
+      Paths_AoC23_Day2
+  autogen-modules:
+      Paths_AoC23_Day2
+  hs-source-dirs:
+      app/FirstPuzzle
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable snd-puzzle
+  main-is: Solution.hs
+  other-modules:
+      GameParser
+      Paths_AoC23_Day2
+  autogen-modules:
+      Paths_AoC23_Day2
+  hs-source-dirs:
+      app/SecondPuzzle
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010

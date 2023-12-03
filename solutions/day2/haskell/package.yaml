@@ -1,0 +1,42 @@
+name:                AoC23-Day2
+version:             0.1.0.0
+github:              "j-negro/Advent-of-Code-2023"
+license:             BSD-3-Clause
+author:              "Juan Negro"
+copyright:           "2023 Juan Negro"
+
+
+
+description:         Please see the README on GitHub at <https://github.com/j-negro/Advent-of-Code-2023#README>
+
+dependencies:
+- base >= 4.7 && < 5
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+_exe-defs: &exe-defaults
+  ghc-options:
+  - -threaded
+  - -rtsopts
+  - -with-rtsopts=-N
+
+executables:
+  fst-puzzle:
+    <<: *exe-defaults
+    main:                Solution.hs
+    source-dirs:         app/FirstPuzzle
+
+  snd-puzzle:
+    <<: *exe-defaults
+    main:                Solution.hs
+    source-dirs:         app/SecondPuzzle
+
