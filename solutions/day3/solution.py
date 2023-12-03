@@ -1,7 +1,6 @@
 import itertools
 import os
 from functools import reduce
-from typing import Any, Generator
 
 main_dir = os.path.dirname(os.path.abspath(__file__))
 
