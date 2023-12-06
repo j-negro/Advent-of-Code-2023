@@ -9,7 +9,7 @@ fn main() {
 }
 
 fn multiply_ways_to_win(input: &str) -> u64 {
-    let races = parse_file(input);
+    let races = parse_file_snd_puzzle(input);
 
     return races
         .iter()
@@ -17,7 +17,7 @@ fn multiply_ways_to_win(input: &str) -> u64 {
         .fold(1, |acc, x| acc * x);
 }
 
-fn parse_file(input: &str) -> Vec<PreviousRace> {
+fn parse_file_fst_puzzle(input: &str) -> Vec<PreviousRace> {
     let lines: Vec<&str> = input.lines().collect();
 
     let times_arr: Vec<u64> = lines[0].split(':').collect::<Vec<&str>>()[1]
@@ -35,6 +35,22 @@ fn parse_file(input: &str) -> Vec<PreviousRace> {
     }
 
     return races;
+}
+
+fn parse_file_snd_puzzle(input: &str) -> Vec<PreviousRace> {
+    let lines: Vec<&str> = input.lines().collect();
+
+    let time = lines[0].split(':').collect::<Vec<&str>>()[1]
+        .replace(" ", "")
+        .parse::<u64>()
+        .unwrap();
+
+    let distance = lines[1].split(':').collect::<Vec<&str>>()[1]
+        .replace(" ", "")
+        .parse::<u64>()
+        .unwrap();
+
+    return vec![PreviousRace::new(time, distance)];
 }
 
 #[derive(Debug)]
