@@ -12,3 +12,6 @@ path = "src/fst.rs"
 [[bin]]
 name = "snd"
 path = "src/snd.rs"
+
+[dependencies]
+itertools = "0.12.0"
