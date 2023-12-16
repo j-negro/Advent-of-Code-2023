@@ -1,21 +1,27 @@
-use types::HandType;
+use std::collections::BTreeSet;
+
+use types::hand::Hand;
 
 mod types;
 
 pub fn get_total_winnings(input: &str) -> u64 {
-    todo!()
-}
+    let hands = parse_file(input);
 
-fn parse_file(input: &str) {
-    for line in input.lines() {
-        let line_arr: Vec<&str> = line
-            .split_whitespace()
-            .collect();
-
-
+    for (idx, hand) in hands.iter().enumerate() {
+        println!("Hand with index {}: {:?}", idx, hand);
     }
+
+    return hands
+        .iter()
+        .enumerate()
+        .map(|(idx, hand)| (idx as u64 + 1) * hand.bid)
+        .sum();
 }
 
+fn parse_file(input: &str) -> BTreeSet<Hand> {
+    let hands: BTreeSet<Hand> = input.lines().map(Hand::new).collect();
+    return hands;
+}
 
 #[cfg(test)]
 mod tests {
