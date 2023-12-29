@@ -1,4 +1,4 @@
-use std::{cmp::Ordering, collections::HashMap};
+use std::cmp::Ordering;
 
 use itertools::Itertools;
 
@@ -35,15 +35,21 @@ impl Hand {
     }
 
     fn get_hand_type(cards: [CardType; 5]) -> HandType {
-        let card_map: HashMap<CardType, u8> = cards.iter().fold(HashMap::new(), |mut map, card| {
-            *map.entry(*card).or_insert(0) += 1;
-            map
-        });
+        let mut card_map = cards.iter().counts();
 
-        let card_counts: Vec<&u8> = card_map
+        let joker_count = card_map.remove(&CardType::J);
+
+        let mut card_counts = card_map
             .values()
             .sorted_by(|x, y| y.cmp(x))
-            .collect::<Vec<&u8>>();
+            .cloned()
+            .collect::<Vec<usize>>();
+
+        match joker_count {
+            Some(5) => return HandType::FiveOAK,
+            Some(n) => card_counts[0] += n,
+            _ => (),
+        }
 
         match card_counts[..] {
             [5] => HandType::FiveOAK,
@@ -53,7 +59,10 @@ impl Hand {
             [2, 2, 1] => HandType::TwoPair,
             [2, 1, 1, 1] => HandType::OnePair,
             [1, 1, 1, 1, 1] => HandType::HighCard,
-            _ => unreachable!("Unexpected hand type"),
+            _ => {
+                dbg!(card_counts);
+                unreachable!("Unexpected hand type")
+            }
         }
     }
 

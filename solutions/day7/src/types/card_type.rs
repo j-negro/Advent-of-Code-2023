@@ -51,18 +51,16 @@ impl Ord for CardType {
                 CardType::A | CardType::K => Ordering::Less,
                 _ => Ordering::Greater,
             },
-            CardType::J => match other {
-                CardType::T | CardType::Number(_) => Ordering::Greater,
-                _ => Ordering::Less,
-            },
             CardType::T => match other {
-                CardType::Number(_) => Ordering::Greater,
+                CardType::Number(_) | CardType::J => Ordering::Greater,
                 _ => Ordering::Less,
             },
             CardType::Number(a) => match other {
                 CardType::Number(b) => a.cmp(b),
+                CardType::J => Ordering::Greater,
                 _ => Ordering::Less,
             },
+            CardType::J => Ordering::Less,
         }
     }
 }
