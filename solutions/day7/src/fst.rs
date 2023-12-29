@@ -8,5 +8,3 @@ fn main() {
     // First puzzle answer is 253638586.
     println!("These hands have a total winnings count of {}", winnings);
 }
-
-

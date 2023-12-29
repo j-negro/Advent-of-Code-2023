@@ -7,10 +7,6 @@ mod types;
 pub fn get_total_winnings(input: &str) -> u64 {
     let hands = parse_file(input);
 
-    for (idx, hand) in hands.iter().enumerate() {
-        println!("Hand with index {}: {:?}", idx, hand);
-    }
-
     return hands
         .iter()
         .enumerate()
