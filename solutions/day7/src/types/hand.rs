@@ -27,11 +27,11 @@ impl Hand {
 
         let bid: u64 = line[1].parse().unwrap();
 
-        return Self {
-            cards: cards,
+        Self {
+            cards,
             hand_type: Hand::get_hand_type(cards),
-            bid: bid,
-        };
+            bid,
+        }
     }
 
     fn get_hand_type(cards: [CardType; 5]) -> HandType {
@@ -45,7 +45,7 @@ impl Hand {
             .sorted_by(|x, y| y.cmp(x))
             .collect::<Vec<&u8>>();
 
-        return match card_counts[..] {
+        match card_counts[..] {
             [5] => HandType::FiveOAK,
             [4, 1] => HandType::FourOAK,
             [3, 2] => HandType::FullHouse,
@@ -54,7 +54,7 @@ impl Hand {
             [2, 1, 1, 1] => HandType::OnePair,
             [1, 1, 1, 1, 1] => HandType::HighCard,
             _ => unreachable!("Unexpected hand type"),
-        };
+        }
     }
 
     fn cmp_hands_by_card(&self, other: &Hand) -> Ordering {
@@ -78,7 +78,7 @@ impl PartialOrd for Hand {
 impl Ord for Hand {
     fn cmp(&self, other: &Self) -> Ordering {
         match self.hand_type.cmp(&other.hand_type) {
-            Ordering::Equal => self.cmp_hands_by_card(&other),
+            Ordering::Equal => self.cmp_hands_by_card(other),
             otherwise => otherwise,
         }
     }

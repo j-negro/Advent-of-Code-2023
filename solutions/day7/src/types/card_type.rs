@@ -22,10 +22,7 @@ impl CardType {
                 if card.is_ascii_digit() {
                     CardType::Number(card as u8 - b'0')
                 } else {
-                    panic!(
-                        "Error parsing the cards, found unexpected char {}",
-                        card.to_string()
-                    )
+                    panic!("Error parsing the cards, found unexpected char {}", card)
                 }
             }
         }

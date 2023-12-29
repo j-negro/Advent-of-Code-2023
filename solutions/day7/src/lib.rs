@@ -7,16 +7,15 @@ mod types;
 pub fn get_total_winnings(input: &str) -> u64 {
     let hands = parse_file(input);
 
-    return hands
+    hands
         .iter()
         .enumerate()
         .map(|(idx, hand)| (idx as u64 + 1) * hand.bid)
-        .sum();
+        .sum()
 }
 
 fn parse_file(input: &str) -> BTreeSet<Hand> {
-    let hands: BTreeSet<Hand> = input.lines().map(Hand::new).collect();
-    return hands;
+    input.lines().map(Hand::new).collect()
 }
 
 #[cfg(test)]
