@@ -1,9 +1,12 @@
-use day6::parse_file;
+use std::iter;
+
+use day8::{lcm, parse_file};
 
 fn main() {
     let input = include_str!("../input.txt");
 
     let steps = get_steps_amount(input);
+    // The correct answer is 8906539031197.
     println!("The amount of steps needed is {}", steps);
 }
 
@@ -15,12 +18,22 @@ pub fn get_steps_amount(input: &str) -> u64 {
 
     let mut currs = map
         .keys()
-        .filter(|key| key.ends_with("A"))
+        .filter(|key| key.ends_with('A'))
         .collect::<Vec<_>>();
 
+    let mut loop_periods = iter::repeat(0).take(currs.len()).collect::<Vec<u64>>();
+    let mut reached_end = iter::repeat(false).take(currs.len()).collect::<Vec<bool>>();
+
     loop {
-        if currs.iter().all(|cur| cur.ends_with("Z")) {
-            return steps;
+        for i in 0..currs.len() {
+            if !reached_end[i] && currs[i].ends_with('Z') {
+                loop_periods[i] = steps;
+                reached_end[i] = true;
+            }
+        }
+        if reached_end.iter().all(|v| *v) {
+            dbg!(&loop_periods);
+            return lcm(loop_periods.as_slice());
         }
 
         if idx == directions.len() {

@@ -1,9 +1,10 @@
-use day6::parse_file;
+use day8::parse_file;
 
 fn main() {
     let input = include_str!("../input.txt");
 
     let steps = get_steps_amount(input);
+    // The correct answer is 13939.
     println!("The amount of steps needed is {}", steps);
 }
 

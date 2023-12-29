@@ -30,3 +30,21 @@ pub fn parse_file(input: &str) -> (Vec<Direction>, HashMap<&str, [&str; 2]>) {
 
     (directions, map)
 }
+
+pub fn lcm(nums: &[u64]) -> u64 {
+    if nums.len() == 1 {
+        return nums[0];
+    }
+
+    let a = nums[0];
+    let b = lcm(&nums[1..]);
+
+    a * b / gcd(a, b)
+}
+
+fn gcd(x: u64, y: u64) -> u64 {
+    if y == 0 {
+        return x;
+    }
+    gcd(y, x % y)
+}
