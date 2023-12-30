@@ -22,22 +22,15 @@ pub fn get_steps_amount(input: &str) -> u64 {
         .collect::<Vec<_>>();
 
     let mut loop_periods = iter::repeat(0).take(currs.len()).collect::<Vec<u64>>();
-    let mut reached_end = iter::repeat(false).take(currs.len()).collect::<Vec<bool>>();
 
     loop {
         for i in 0..currs.len() {
-            if !reached_end[i] && currs[i].ends_with('Z') {
+            if loop_periods[i] == 0 && currs[i].ends_with('Z') {
                 loop_periods[i] = steps;
-                reached_end[i] = true;
             }
         }
-        if reached_end.iter().all(|v| *v) {
-            dbg!(&loop_periods);
+        if loop_periods.iter().all(|v| *v != 0) {
             return lcm(loop_periods.as_slice());
-        }
-
-        if idx == directions.len() {
-            idx = 0;
         }
 
         let curr_dir = directions[idx].idx();
@@ -53,7 +46,7 @@ pub fn get_steps_amount(input: &str) -> u64 {
             .collect::<Vec<_>>();
 
         steps += 1;
-        idx += 1;
+        idx = (idx + 1) % directions.len();
     }
 }
 
