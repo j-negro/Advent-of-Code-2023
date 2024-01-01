@@ -10,7 +10,7 @@ pub fn parse_file(input: &str) -> Vec<Vec<i64>> {
         .collect::<Vec<_>>()
 }
 
-pub fn get_extrapolated_value(history: &Vec<i64>) -> i64 {
+pub fn construct_extrapolation_sequences(history: &Vec<i64>) -> Vec<Vec<i64>> {
     let mut sequences: Vec<Vec<i64>> = vec![history.clone()];
 
     let mut idx = 0;
@@ -29,18 +29,5 @@ pub fn get_extrapolated_value(history: &Vec<i64>) -> i64 {
         sequences.push(new_sequence);
         idx += 1;
     }
-
-    let last_num = sequences[idx][0];
-
-    sequences[idx].push(last_num);
-
-    for rev_idx in (0..idx).rev() {
-        let prev_num = sequences[rev_idx + 1].last().unwrap();
-
-        let new_num = sequences[rev_idx].last().unwrap() + prev_num;
-
-        sequences[rev_idx].push(new_num);
-    }
-
-    *sequences[0].last().unwrap()
+    sequences
 }
