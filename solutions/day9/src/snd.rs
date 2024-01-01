@@ -4,7 +4,7 @@ fn main() {
     let input = include_str!("../input.txt");
 
     let steps = sum_extrapolated_values(input);
-    // The correct answer is -.
+    // The correct answer is 908.
     println!("The sum of all extrapolated values is {}", steps);
 }
 
@@ -21,19 +21,19 @@ pub fn get_extrapolated_value(history: &Vec<i64>) -> i64 {
     let mut sequences: Vec<Vec<i64>> = construct_extrapolation_sequences(history);
     let last_sequence_idx = sequences.len() - 1;
 
-    let last_num = sequences[last_sequence_idx][0];
+    let fst_num = sequences[last_sequence_idx][0];
 
-    sequences[last_sequence_idx].push(last_num);
+    sequences[last_sequence_idx].insert(0, fst_num);
 
     for rev_idx in (0..last_sequence_idx).rev() {
-        let prev_num = sequences[rev_idx + 1].last().unwrap();
+        let prev_num = sequences[rev_idx + 1].first().unwrap();
 
-        let new_num = sequences[rev_idx].last().unwrap() + prev_num;
+        let new_num = sequences[rev_idx].first().unwrap() - prev_num;
 
-        sequences[rev_idx].push(new_num);
+        sequences[rev_idx].insert(0, new_num);
     }
 
-    *sequences[0].last().unwrap()
+    *sequences[0].first().unwrap()
 }
 
 #[cfg(test)]
