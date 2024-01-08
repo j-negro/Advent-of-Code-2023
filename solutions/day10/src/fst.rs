@@ -3,7 +3,7 @@ use day10::TileGrid;
 fn main() {
     let input = include_str!("../input.txt");
 
-    // The correct answer is -.
+    // The correct answer is 6717.
     println!(
         "The maximum distance away from the animal is {}",
         get_max_lenght(input)
