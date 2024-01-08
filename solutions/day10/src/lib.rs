@@ -50,7 +50,7 @@ impl TileGrid {
         loop {
             (position, direction) = self.loop_step(position, direction).unwrap();
 
-            loop_positions.push(position.clone());
+            loop_positions.push(position);
             if self.tiles[position[0]][position[1]] == Tile::Animal {
                 break;
             }

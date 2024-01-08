@@ -17,7 +17,7 @@ fn get_max_lenght(input: &str) -> usize {
 
     let loop_positions = grid.loop_positions(start);
 
-    loop_positions.iter().count() / 2
+    loop_positions.len() / 2
 }
 
 #[cfg(test)]
